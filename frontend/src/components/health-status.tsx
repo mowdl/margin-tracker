@@ -1,15 +1,21 @@
 import { useQuery } from '@tanstack/react-query'
 import { getHealthOptions } from '@/client/@tanstack/react-query.gen'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export function HealthStatus() {
-  const { data, isPending, isError } = useQuery(getHealthOptions())
+  const { data, isPending, isError, isFetching, refetch } = useQuery(getHealthOptions())
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Backend</CardTitle>
+        <CardAction>
+          <Button variant="outline" size="sm" disabled={isFetching} onClick={() => refetch()}>
+            {isFetching ? 'Checking…' : 'Check again'}
+          </Button>
+        </CardAction>
       </CardHeader>
       <CardContent>
         {isPending ? (

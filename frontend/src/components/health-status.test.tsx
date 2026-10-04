@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, expect, test, vi } from 'vitest'
 import { HealthStatus } from './health-status'
 
@@ -34,4 +34,14 @@ test('shows when the backend is unreachable', async () => {
   renderWithClient()
   expect(await screen.findByText('Unreachable')).toBeInTheDocument()
   expect(fetch).toHaveBeenCalledOnce()
+})
+
+test('calls the backend again when clicking the button', async () => {
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(async () => Response.json({ status: 'ok' })),
+  )
+  renderWithClient()
+  fireEvent.click(await screen.findByRole('button', { name: 'Check again' }))
+  await vi.waitFor(() => expect(fetch).toHaveBeenCalledTimes(2))
 })

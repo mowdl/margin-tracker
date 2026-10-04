@@ -1,0 +1,25 @@
+# Data: real client files must never be committed
+data/*
+!data/anonymized/
+data/anonymized/*
+!data/anonymized/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Env, Vercel and editors
+.env*
+.vercel/
+.DS_Store
+.vscode/
+.idea/

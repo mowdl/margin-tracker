@@ -66,3 +66,14 @@ pnpm gen:api
 ```
 
 This writes `frontend/openapi.json` and `frontend/src/client/`.
+
+## Deployment (testing)
+
+The app deploys to Vercel as one project: `frontend/` is served as static files and `api/index.py` runs the FastAPI app as a Python function for `/api/*`. Every push to a PR gets a preview URL; `main` deploys to production.
+
+Vercel installs backend packages from the root `requirements.txt`. After changing backend dependencies, regenerate it:
+
+```sh
+cd backend
+uv export --no-dev --no-hashes --no-emit-project -o ../requirements.txt
+```

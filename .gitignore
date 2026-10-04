@@ -15,9 +15,9 @@ node_modules/
 dist/
 *.tsbuildinfo
 
-# Env and editors
-.env
-.env.*
+# Env, Vercel and editors
+.env*
+.vercel/
 .DS_Store
 .vscode/
 .idea/

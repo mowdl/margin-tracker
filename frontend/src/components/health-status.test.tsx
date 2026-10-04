@@ -22,7 +22,7 @@ test('shows the backend status', async () => {
     vi.fn(async () => Response.json({ status: 'ok' })),
   )
   renderWithClient()
-  expect(await screen.findByText('ok')).toBeInTheDocument()
+  expect(await screen.findByText('Backend is up')).toBeInTheDocument()
   expect(fetch).toHaveBeenCalledOnce()
 })
 
@@ -32,7 +32,7 @@ test('shows when the backend is unreachable', async () => {
     vi.fn(async () => new Response(null, { status: 500 })),
   )
   renderWithClient()
-  expect(await screen.findByText('Unreachable')).toBeInTheDocument()
+  expect(await screen.findByText('Backend is unreachable')).toBeInTheDocument()
   expect(fetch).toHaveBeenCalledOnce()
 })
 
@@ -42,6 +42,7 @@ test('calls the backend again when clicking the button', async () => {
     vi.fn(async () => Response.json({ status: 'ok' })),
   )
   renderWithClient()
-  fireEvent.click(await screen.findByRole('button', { name: 'Check again' }))
+  await screen.findByText('Backend is up')
+  fireEvent.click(screen.getByRole('button', { name: 'Call /health' }))
   await vi.waitFor(() => expect(fetch).toHaveBeenCalledTimes(2))
 })

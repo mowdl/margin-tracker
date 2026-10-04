@@ -1,6 +1,8 @@
 # Data: real client files must never be committed
 data/*
-!data/.gitkeep
+!data/anonymized/
+data/anonymized/*
+!data/anonymized/.gitkeep
 
 # Python
 __pycache__/

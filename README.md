@@ -7,7 +7,7 @@
 | `backend/`   | FastAPI app (Python 3.13, uv)                                      |
 | `frontend/`  | React app (Vite, TanStack Router + Query, Tailwind, shadcn/ui)     |
 | `notebooks/` | Jupyter notebooks, own Python environment                          |
-| `data/`      | Local input files. **Ignored by git, never commit real data.**    |
+| `data/anonymized/` | Anonymized input files. **Excluded from git, never pushed.** |
 | `docs/`      | Architecture and process docs                                      |
 
 ## Run the app
